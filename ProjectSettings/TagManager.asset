@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Optional
+  - sku_winch1
+  - sku_tires1
+  - sku_tires2
+  - sku_weapon1
+  - sku_weapon2
+  - LabelCurrentSelection
+  - sku_winch
+  - sku_spiked
+  - sku_shunt
+  - Configurables
+  - Tiresets
+  - Fronts
+  - Weapons
+  - Car
+  - GameManager
+  - LabelCurrentPrice
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
