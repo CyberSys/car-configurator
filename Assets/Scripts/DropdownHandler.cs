@@ -20,7 +20,12 @@ public class DropdownHandler : MonoBehaviour
 
     void Start()
     {
+        // Set correct default dropdown selecton
+        dropdown.value = (int) gameManager.myCarInstance.GetCarType();
         
+        // Set selection label default
+        currentSelectionText.text = "Configuring: " + gameManager.myCarInstance.GetCarFullNameAsString(
+                                                        gameManager.myCarInstance.GetCarType());
     }
 
     public void ShowNextCar()

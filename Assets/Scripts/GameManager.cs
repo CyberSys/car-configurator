@@ -29,21 +29,19 @@ public class GameManager : MonoBehaviour
 
     public void NewCarInstance(CarType carType)
     {
-        GameObject myCarPrefab = GameObject.FindGameObjectWithTag("Car");
+        myCarPrefab = GameObject.FindGameObjectWithTag("Car");
         if (myCarPrefab != null)
         {
-            Debug.Log("Destroying old: " + myCarPrefab.GetComponent<Transform>().name);
-            Destroy(myCarPrefab.gameObject);
+            DestroyImmediate(myCarPrefab.gameObject);
             myCarPrefab = null;
         }
 
-        // Create an instance of the Buggy
+        // Create an instance of the vehicle
         myCarInstance = ScriptableObject.CreateInstance<Car>();
         myCarInstance.SetDefaultConfig(carType);
 
-        // Show it in the world
-        myCarPrefab = (GameObject) Instantiate(myCarInstance.getPrefab(), spawnPoint.transform.position, spawnPoint.transform.rotation);
-        //myCarPrefab.name = "CurrentCarSelection";
+        // Create an instance of it's prefab
+        Instantiate(myCarInstance.getPrefab(), spawnPoint.transform.position, spawnPoint.transform.rotation);
 
         // Set base prices in instance object
         myCarInstance.SetCarBasePriceTotal(carType);
@@ -52,17 +50,14 @@ public class GameManager : MonoBehaviour
 
         // TODO: Add car base price (cost) to user's shopping list
         // TODO: Add standard tires (free) to user's shopping list
-
         // TODO: Add to a shopping list here at some point...
         currentPriceText.text = "Running total: £" + myCarInstance.GetTotalSpend().ToString();
     }
 
     public void ShowTiresetPrefab(TiresetType tiresetToShow)
     {
-        GameObject newCarPrefab = GameObject.FindGameObjectWithTag("Car");
+        GameObject newCarPrefab = GameObject.FindGameObjectWithTag("Car"); // should be the new object at this point. it isn't
         Transform[] transforms = newCarPrefab.GetComponentsInChildren<Transform>();
-
-        Debug.Log(tiresetToShow);
 
         foreach (Transform transform in transforms)
         {
@@ -73,16 +68,15 @@ public class GameManager : MonoBehaviour
                     if (tireSet.gameObject.name == "Standard" && tiresetToShow == TiresetType.Standard)
                     {
                         tireSet.gameObject.SetActive(true);
+                        break;
                     }
                     else
                     {
                         tireSet.gameObject.SetActive(false);
                     }
                 }
-                return;
+                break;
             }
         }
-
-
     }
 }

@@ -106,6 +106,11 @@ public class Car : ScriptableObject
         }
     }
 
+    public CarType GetCarType()
+    {
+        return carType;
+    }
+
     public void SetDefaultConfig(CarType theCarType)
     {
         switch (theCarType)
