@@ -54,6 +54,33 @@ public class GameManager : MonoBehaviour
         currentPriceText.text = "Running total: £" + myCarInstance.GetTotalSpend().ToString();
     }
 
+    public void SetTireset(TiresetType tiresetToShow)
+    {
+        //Debug.Log(tiresetToShow);
+        // TODO: Remove existing tireset from object
+        // TODO: Remove from shopping list
+        // TODO: Add new value to shopping list
+        HideTiresetPrefabs();
+        ShowTiresetPrefab(tiresetToShow);
+    }
+
+    public void HideTiresetPrefabs()
+    {
+        GameObject newCarPrefab = GameObject.FindGameObjectWithTag("Car"); // should be the new object at this point. it isn't
+        Transform[] transforms = newCarPrefab.GetComponentsInChildren<Transform>();
+
+        foreach (Transform transform in transforms)
+        {
+            if (transform.name == "Tiresets")
+            {
+                foreach (Transform tireSet in transform)
+                {
+                    tireSet.gameObject.SetActive(false);
+                }
+            }
+        }
+    }
+
     public void ShowTiresetPrefab(TiresetType tiresetToShow)
     {
         GameObject newCarPrefab = GameObject.FindGameObjectWithTag("Car"); // should be the new object at this point. it isn't
@@ -66,6 +93,11 @@ public class GameManager : MonoBehaviour
                 foreach (Transform tireSet in transform)
                 {
                     if (tireSet.gameObject.name == "Standard" && tiresetToShow == TiresetType.Standard)
+                    {
+                        tireSet.gameObject.SetActive(true);
+                        break;
+                    }
+                    else if (tireSet.gameObject.name == "Spiked" && tiresetToShow == TiresetType.Spiked)
                     {
                         tireSet.gameObject.SetActive(true);
                         break;

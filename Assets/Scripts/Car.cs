@@ -153,6 +153,11 @@ public class Car : ScriptableObject
         }
     }
 
+    public TiresetType GetTireset()
+    {
+        return carTiresetType;
+    }
+
     public void SetTireset(TiresetType tiresetType)
     {
         carTiresetType = tiresetType;
