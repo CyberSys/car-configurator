@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DropdownFrontSelect : MonoBehaviour
+public class DropdownWeaponSelect : MonoBehaviour
 {
     private GameManager gameManager;
     private Dropdown dropdown;
@@ -17,12 +17,12 @@ public class DropdownFrontSelect : MonoBehaviour
     void Start()
     {
         // Set correct default dropdown selecton
-        dropdown.value = (int) gameManager.myCarInstance.GetFront();
+        dropdown.value = (int) gameManager.myCarInstance.GetWeapon();
     }
 
-    public void ShowNextFront()
+    public void ShowNextWeapon()
     {
-        // Pass the dropdown selection value as a FrontType to gameManager
-        gameManager.SetFront((FrontType) dropdown.value);
+        // Pass the dropdown selection value as a WeaponType to gameManager
+        gameManager.SetWeapon((WeaponType) dropdown.value);
     }
 }

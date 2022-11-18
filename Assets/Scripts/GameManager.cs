@@ -137,11 +137,9 @@ public class GameManager : MonoBehaviour
 
     public void SetTireset(TiresetType tiresetToShow)
     {
-        //Debug.Log(tiresetToShow);
-        // TODO: Remove existing tireset from object
+        HideTiresetPrefabs();
         // TODO: Remove from shopping list
         // TODO: Add new value to shopping list
-        HideTiresetPrefabs();
         ShowTiresetPrefab(tiresetToShow);
     }
 
@@ -169,6 +167,65 @@ public class GameManager : MonoBehaviour
                     else
                     {
                         tireSet.gameObject.SetActive(false);
+                    }
+                }
+                break;
+            }
+        }
+    }
+
+    public void HideWeaponPrefabs()
+    {
+        GameObject newCarPrefab = GameObject.FindGameObjectWithTag("Car");
+        Transform[] transforms = newCarPrefab.GetComponentsInChildren<Transform>();
+
+        foreach (Transform transform in transforms)
+        {
+            if (transform.name == "Weapons")
+            {
+                foreach (Transform weapon in transform)
+                {
+                    weapon.gameObject.SetActive(false);
+                }
+            }
+        }
+    }
+
+    public void SetWeapon(WeaponType weaponToShow)
+    {
+        HideWeaponPrefabs();
+        // TODO: Remove from shopping list
+        // TODO: Add new value to shopping list
+        if (weaponToShow != WeaponType.None)
+        {
+            ShowWeaponPrefab(weaponToShow);
+        }
+    }
+
+    public void ShowWeaponPrefab(WeaponType weaponToShow)
+    {
+        GameObject newCarPrefab = GameObject.FindGameObjectWithTag("Car");
+        Transform[] transforms = newCarPrefab.GetComponentsInChildren<Transform>();
+
+        foreach (Transform transform in transforms)
+        {
+            if (transform.name == "Weapons")
+            {
+                foreach (Transform weapon in transform)
+                {
+                    if (weapon.gameObject.name == "CustomWeaponSingle" && weaponToShow == WeaponType.SingleBarrel)
+                    {
+                        weapon.gameObject.SetActive(true);
+                        break;
+                    }
+                    else if (weapon.gameObject.name == "CustomWeaponTwin" && weaponToShow == WeaponType.TwinBarrel)
+                    {
+                        weapon.gameObject.SetActive(true);
+                        break;
+                    }
+                    else
+                    {
+                        weapon.gameObject.SetActive(false);
                     }
                 }
                 break;

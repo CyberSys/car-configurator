@@ -116,6 +116,11 @@ public class Car : ScriptableObject
         return carFrontType;
     }
 
+    public WeaponType GetWeapon()
+    {
+        return carWeaponType;
+    }
+
     public void SetDefaultConfig(CarType theCarType)
     {
         switch (theCarType)
