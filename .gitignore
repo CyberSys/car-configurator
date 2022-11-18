@@ -75,5 +75,5 @@ crashlytics-build.properties
 .vsconfig
 
 # Third Party Assets
-Assets/_Imports
-Assets/_Imports.meta
+Assets/Imports
+Assets/Imports.meta
