@@ -111,6 +111,11 @@ public class Car : ScriptableObject
         return carType;
     }
 
+    public FrontType GetFront()
+    {
+        return carFrontType;
+    }
+
     public void SetDefaultConfig(CarType theCarType)
     {
         switch (theCarType)

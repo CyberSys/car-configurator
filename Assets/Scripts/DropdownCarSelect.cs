@@ -9,6 +9,7 @@ public class DropdownCarSelect : MonoBehaviour
     private GameManager gameManager;
     private Dropdown dropdownCarSelect;
     private Dropdown dropdownTiresetSelect;
+    private Dropdown dropdownFrontSelect;
     private TMP_Text currentSelectionText;
     
     void Awake()
@@ -21,6 +22,7 @@ public class DropdownCarSelect : MonoBehaviour
     void Start()
     {
         dropdownTiresetSelect = GameObject.Find("DropdownSelectTireset").GetComponent<Dropdown>();
+        dropdownFrontSelect = GameObject.Find("DropdownSelectFront").GetComponent<Dropdown>();
 
         // Set correct default dropdown selecton
         dropdownCarSelect.value = (int) gameManager.myCarInstance.GetCarType();
@@ -33,6 +35,7 @@ public class DropdownCarSelect : MonoBehaviour
     private void ResetDropdowns()
     {
         dropdownTiresetSelect.value = 0;
+        dropdownFrontSelect.value = 0;
     }
 
     public void ShowNextCar()
