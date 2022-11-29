@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
         myCarInstance.SetDefaultConfig(carType);
 
         // Create an instance of it's prefab
-        Instantiate(myCarInstance.getPrefab(), spawnPoint.transform.position, spawnPoint.transform.rotation);
+        Instantiate(myCarInstance.GetCarPrefab(), spawnPoint.transform.position, spawnPoint.transform.rotation);
 
         // Set base prices in instance object
         myCarInstance.SetCarBasePriceTotal(carType);

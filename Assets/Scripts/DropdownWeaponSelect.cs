@@ -17,7 +17,7 @@ public class DropdownWeaponSelect : MonoBehaviour
     void Start()
     {
         // Set correct default dropdown selecton
-        dropdown.value = (int) gameManager.myCarInstance.GetWeapon();
+        dropdown.value = (int) gameManager.myCarInstance.GetWeaponType();
     }
 
     public void ShowNextWeapon()

@@ -17,7 +17,7 @@ public class DropdownFrontSelect : MonoBehaviour
     void Start()
     {
         // Set correct default dropdown selecton
-        dropdown.value = (int) gameManager.myCarInstance.GetFront();
+        dropdown.value = (int) gameManager.myCarInstance.GetFrontType();
     }
 
     public void ShowNextFront()

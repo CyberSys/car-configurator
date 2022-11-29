@@ -9,12 +9,12 @@ public enum CarType
     LightCoupe
 }
 
-// May not need this...
 public enum Configurable
 {
-    Tireset,
-    Front,
-    Weapon
+    CarType,
+    TiresetType,
+    FrontType,
+    WeaponType
 }
 
 public enum TiresetType
@@ -65,45 +65,13 @@ public class Car : ScriptableObject
     [SerializeField]
     private int totalPrice = 0;
 
-    public int GetCarBasePrice(CarType carType)
+
+    /*********************************************************************
+     * Class property getters
+     *********************************************************************/
+    public Object GetCarPrefab()
     {
-        switch (carType)
-        {
-            case CarType.Buggy:
-                return 10000;
-
-            case CarType.LightCoupe:
-                return 20000;
-
-            case CarType.HeavyCoupe:
-                return 50000;
-
-            default:
-                return 0;
-        }
-    }
-
-    public void SetCarBasePriceTotal(CarType carType)
-    {
-        basePriceTotal = (int)GetCarBasePrice(carType);
-    }
-
-   public string GetCarFullNameAsString(CarType carType)
-   {
-        switch (carType)
-        {
-            case CarType.Buggy:
-                return "Bugs Buggy";
-
-            case CarType.HeavyCoupe:
-                return "Heavy Coupe";
-
-            case CarType.LightCoupe:
-                return "Light Coupe";
-
-            default:
-                return "";
-        }
+        return Resources.Load(carPrefabStr);
     }
 
     public CarType GetCarType()
@@ -111,16 +79,36 @@ public class Car : ScriptableObject
         return carType;
     }
 
-    public FrontType GetFront()
+    public FrontType GetFrontType()
     {
         return carFrontType;
     }
 
-    public WeaponType GetWeapon()
+    public WeaponType GetWeaponType()
     {
         return carWeaponType;
     }
 
+    public TiresetType GetTiresetType()
+    {
+        return carTiresetType;
+    }
+    
+    public int GetTotalSpend()
+    {
+        SetTotalSpend();
+        return totalPrice;
+    }
+
+    /*********************************************************************
+     * Class property setters
+     *********************************************************************/
+
+    public void SetCarBasePriceTotal(CarType carType)
+    {
+        basePriceTotal = (int) GetCarBasePrice(carType);
+    }
+    
     public void SetDefaultConfig(CarType theCarType)
     {
         switch (theCarType)
@@ -148,26 +136,6 @@ public class Car : ScriptableObject
         }
     }
 
-    public int GetCarTiresetPrice(TiresetType tiresetType)
-    {
-        switch (tiresetType)
-        {
-            case TiresetType.Standard:
-                return 0; // FREE
-
-            case TiresetType.Spiked:
-                return (750 * 4);
-
-            default:
-                return 0;
-        }
-    }
-
-    public TiresetType GetTireset()
-    {
-        return carTiresetType;
-    }
-
     public void SetTireset(TiresetType tiresetType)
     {
         carTiresetType = tiresetType;
@@ -178,15 +146,41 @@ public class Car : ScriptableObject
         switch (tiresetType)
         {
             case TiresetType.Standard:
-                tiresetTotal = (int) GetCarTiresetPrice(TiresetType.Standard);
+                tiresetTotal = (int)GetCarTiresetPrice(TiresetType.Standard);
                 break;
 
             case TiresetType.Spiked:
-                tiresetTotal = (int) GetCarTiresetPrice(TiresetType.Spiked);
+                tiresetTotal = (int)GetCarTiresetPrice(TiresetType.Spiked);
                 break;
 
             default:
                 break;
+        }
+    }
+
+    public void SetTotalSpend()
+    {
+        totalPrice = basePriceTotal + tiresetTotal + frontTotal + weaponTotal;
+    }
+
+    /********************************************************************
+     * Part name lookups
+     ********************************************************************/
+    public string GetCarFullNameAsString(CarType carType)
+    {
+        switch (carType)
+        {
+            case CarType.Buggy:
+                return "Bugs Buggy";
+
+            case CarType.HeavyCoupe:
+                return "Heavy Coupe";
+
+            case CarType.LightCoupe:
+                return "Light Coupe";
+
+            default:
+                return "";
         }
     }
 
@@ -244,37 +238,40 @@ public class Car : ScriptableObject
         }
     }
 
-    public Object getPrefab()
-    {
-        return Resources.Load(carPrefabStr);
-    }
 
-    public string SetCarPrefab(CarType carType)
+    /********************************************************************
+     * Pricing lookups
+     ********************************************************************/
+    public int GetCarBasePrice(CarType carType)
     {
         switch (carType)
         {
             case CarType.Buggy:
-                return "Prefabs/Buggy";
-
-            case CarType.HeavyCoupe:
-                return "Prefabs/HeavyCoupe";
+                return 10000;
 
             case CarType.LightCoupe:
-                return "Prefabs/LightCoupe";
+                return 20000;
+
+            case CarType.HeavyCoupe:
+                return 50000;
 
             default:
-                return "";
+                return 0;
         }
     }
 
-    public void SetTotalSpend()
+    public int GetCarTiresetPrice(TiresetType tiresetType)
     {
-        totalPrice = basePriceTotal + tiresetTotal + frontTotal + weaponTotal;
-    }
+        switch (tiresetType)
+        {
+            case TiresetType.Standard:
+                return 0; // FREE
 
-    public int GetTotalSpend()
-    {
-        SetTotalSpend();
-        return totalPrice;
+            case TiresetType.Spiked:
+                return (750 * 4);
+
+            default:
+                return 0;
+        }
     }
 }

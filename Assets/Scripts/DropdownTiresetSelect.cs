@@ -17,7 +17,7 @@ public class DropdownTiresetSelect : MonoBehaviour
     void Start()
     {
         // Set correct default dropdown selecton
-        dropdown.value = (int) gameManager.myCarInstance.GetTireset();
+        dropdown.value = (int) gameManager.myCarInstance.GetTiresetType();
     }
 
     public void ShowNextTireset()
