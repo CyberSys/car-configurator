@@ -9,7 +9,7 @@ public enum CarType
     LightCoupe
 }
 
-public enum Configurable
+public enum ConfigurableType
 {
     CarType,
     TiresetType,
@@ -146,11 +146,11 @@ public class Car : ScriptableObject
         switch (tiresetType)
         {
             case TiresetType.Standard:
-                tiresetTotal = (int)GetCarTiresetPrice(TiresetType.Standard);
+                tiresetTotal = (int)GetTiresetPrice(TiresetType.Standard);
                 break;
 
             case TiresetType.Spiked:
-                tiresetTotal = (int)GetCarTiresetPrice(TiresetType.Spiked);
+                tiresetTotal = (int)GetTiresetPrice(TiresetType.Spiked);
                 break;
 
             default:
@@ -260,7 +260,7 @@ public class Car : ScriptableObject
         }
     }
 
-    public int GetCarTiresetPrice(TiresetType tiresetType)
+    public int GetTiresetPrice(TiresetType tiresetType)
     {
         switch (tiresetType)
         {
@@ -273,5 +273,79 @@ public class Car : ScriptableObject
             default:
                 return 0;
         }
+    }
+
+    public int GetFrontPrice(FrontType frontType)
+    {
+        switch (frontType)
+        {
+            case FrontType.None:
+                return 0;
+
+            case FrontType.Winch:
+                return 500;
+
+            case FrontType.Spiked:
+                return 2500;
+
+            case FrontType.Shunt:
+                return 3500;
+
+            default:
+                return 0;
+        }
+    }
+
+    public int GetWeaponPrice(WeaponType weaponType)
+    {
+        switch (weaponType)
+        {
+            case WeaponType.None:
+                return 0;
+
+            case WeaponType.SingleBarrel:
+                return 500;
+
+            case WeaponType.TwinBarrel:
+                return 800;
+
+            default:
+                return 0;
+        }
+    }
+
+    // Returns tuple of both full name representation and price
+    (string, int) GetConfigurableNameAndPrice(ConfigurableType configurableType, int userSelection)
+    {
+        string configurableName = "";
+        int configurablePrice = 0;
+
+        switch (configurableType)
+        {
+            case ConfigurableType.CarType:
+                configurableName = GetCarFullNameAsString((CarType) userSelection);
+                configurablePrice = GetCarBasePrice((CarType) userSelection);
+                break;
+
+            case ConfigurableType.TiresetType:
+                configurableName = GetTiresetNameAsString((TiresetType) userSelection);
+                configurablePrice = GetTiresetPrice((TiresetType) userSelection);
+                break;
+
+            case ConfigurableType.FrontType:
+                configurableName = GetFrontNameAsString((FrontType) userSelection);
+                configurablePrice = GetFrontPrice((FrontType) userSelection);
+                break;
+
+            case ConfigurableType.WeaponType:
+                configurableName = GetWeaponNameAsString((WeaponType) userSelection);
+                configurablePrice = GetWeaponPrice((WeaponType) userSelection);
+                break;
+
+            default:
+                break;
+        }
+
+        return (configurableName, configurablePrice);
     }
 }
