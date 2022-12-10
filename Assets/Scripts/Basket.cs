@@ -16,14 +16,12 @@ public class Basket : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
-        SetBasketDefaults();
-        //LogBasketItems();
     }
 
     /*********************************************************************
      * Class property getters
      *********************************************************************/
-    void LogBasketItems()
+    public void LogBasketItems()
     {
         Debug.Log("basketItems contains " + basketItems.Count + " items:");
         foreach (KeyValuePair<string, int> item in basketItems)
@@ -35,12 +33,20 @@ public class Basket : MonoBehaviour
     /*********************************************************************
      * Class property setters
      *********************************************************************/
-    void SetBasketDefaults()
+    public void SetBasketDefaults()
     {
         SetBasketNewItem("CarType", 0);        // buggy
         SetBasketNewItem("TiresetType", 0);    // standard tireset (free)
         SetBasketNewItem("FrontType", 0);      // none
         SetBasketNewItem("WeaponType", 0);     // none
+    }
+
+    public void ResetBasket()
+    {
+        SetBasketChangeItem("CarType", 0);        // buggy
+        SetBasketChangeItem("TiresetType", 0);    // standard tireset (free)
+        SetBasketChangeItem("FrontType", 0);      // none
+        SetBasketChangeItem("WeaponType", 0);     // none
     }
 
     public void SetBasketChangeItem(string configurableType, int configurableValue)

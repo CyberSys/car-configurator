@@ -41,7 +41,7 @@ public enum WeaponType
 [CreateAssetMenu]
 public class Car : ScriptableObject
 {
-    // User configurables
+    // User-set configurables
     [SerializeField]
     private CarType carType;
     [SerializeField]
@@ -53,7 +53,7 @@ public class Car : ScriptableObject
     [SerializeField]
     private string carPrefabStr;
 
-    // User totals
+    // User-set totals
     [SerializeField]
     private int basePriceTotal = 0;
     [SerializeField]
@@ -69,6 +69,32 @@ public class Car : ScriptableObject
     /*********************************************************************
      * Class property getters
      *********************************************************************/
+    public int GetCarBasePriceTotal()
+    {
+        return basePriceTotal;
+    }
+
+    public int GetTiresetTotal()
+    {
+        return tiresetTotal;
+    }
+
+    public int GetFrontTotal()
+    {
+        return frontTotal;
+    }
+
+    public int GetWeaponTotal()
+    {
+        return weaponTotal;
+    }
+
+    public int GetTotalSpend()
+    {
+        SetTotalSpend();
+        return totalPrice;
+    }
+
     public Object GetCarPrefab()
     {
         return Resources.Load(carPrefabStr);
@@ -92,12 +118,6 @@ public class Car : ScriptableObject
     public TiresetType GetTiresetType()
     {
         return carTiresetType;
-    }
-    
-    public int GetTotalSpend()
-    {
-        SetTotalSpend();
-        return totalPrice;
     }
 
     /*********************************************************************
@@ -136,6 +156,31 @@ public class Car : ScriptableObject
         }
     }
 
+    public void SetFrontPriceTotal(FrontType frontType)
+    {
+        switch (frontType)
+        {
+            case FrontType.None:
+                frontTotal = (int) GetFrontPrice(FrontType.None);
+                break;
+
+            case FrontType.Winch:
+                frontTotal = (int) GetFrontPrice(FrontType.Winch);
+                break;
+
+            case FrontType.Spiked:
+                frontTotal = (int) GetFrontPrice(FrontType.Spiked);
+                break;
+
+            case FrontType.Shunt:
+                frontTotal = (int) GetFrontPrice(FrontType.Shunt);
+                break;
+
+            default:
+                break;
+        }
+    }
+
     public void SetTireset(TiresetType tiresetType)
     {
         carTiresetType = tiresetType;
@@ -146,11 +191,11 @@ public class Car : ScriptableObject
         switch (tiresetType)
         {
             case TiresetType.Standard:
-                tiresetTotal = (int)GetTiresetPrice(TiresetType.Standard);
+                tiresetTotal = (int) GetTiresetPrice(TiresetType.Standard);
                 break;
 
             case TiresetType.Spiked:
-                tiresetTotal = (int)GetTiresetPrice(TiresetType.Spiked);
+                tiresetTotal = (int) GetTiresetPrice(TiresetType.Spiked);
                 break;
 
             default:
@@ -161,6 +206,27 @@ public class Car : ScriptableObject
     public void SetTotalSpend()
     {
         totalPrice = basePriceTotal + tiresetTotal + frontTotal + weaponTotal;
+    }
+
+    public void SetWeaponPriceTotal(WeaponType weaponType)
+    {
+        switch (weaponType)
+        {
+            case WeaponType.None:
+                weaponTotal = (int) GetWeaponPrice(WeaponType.None);
+                break;
+
+            case WeaponType.SingleBarrel:
+                weaponTotal = (int) GetWeaponPrice(WeaponType.SingleBarrel);
+                break;
+
+            case WeaponType.TwinBarrel:
+                weaponTotal = (int) GetWeaponPrice(WeaponType.TwinBarrel);
+                break;
+
+            default:
+                break;
+        }
     }
 
     /********************************************************************

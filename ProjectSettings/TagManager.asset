@@ -21,6 +21,7 @@ TagManager:
   - Car
   - GameManager
   - LabelCurrentPrice
+  - ShoppingBasket
   layers:
   - Default
   - TransparentFX

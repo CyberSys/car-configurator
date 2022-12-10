@@ -7,6 +7,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public Car myCarInstance;
+    private Basket basket;
     private GameObject spawnPoint;
     private GameObject myCarPrefab;
     private Dictionary<int, string> shoppingList = new Dictionary<int, string>();
@@ -15,9 +16,12 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        basket = GameObject.FindGameObjectWithTag("ShoppingBasket").GetComponent<Basket>();
         spawnPoint = GameObject.Find("SpawnPoint");
         currentSelectionText = GameObject.Find("LabelCurrentSelection").GetComponent<TMP_Text>();
         currentPriceText = GameObject.Find("LabelRunningTotal").GetComponent<TMP_Text>();
+
+        basket.SetBasketDefaults();
         NewCarInstance(CarType.Buggy); // Set Buggy first
     }
 
@@ -42,16 +46,22 @@ public class GameManager : MonoBehaviour
 
         // Create an instance of it's prefab
         Instantiate(myCarInstance.GetCarPrefab(), spawnPoint.transform.position, spawnPoint.transform.rotation);
-
-        // Set base prices in instance object
-        myCarInstance.SetCarBasePriceTotal(carType);
-        myCarInstance.SetTiresetPriceTotal(TiresetType.Standard);
         ShowTiresetPrefab(TiresetType.Standard);
 
-        // TODO: Add car base price (cost) to user's shopping list
-        // TODO: Add standard tires (free) to user's shopping list
-        // TODO: Add to a shopping list here at some point...
-        currentPriceText.text = "Running total: £" + myCarInstance.GetTotalSpend().ToString();
+        // Set basic totals
+        myCarInstance.SetCarBasePriceTotal(carType);
+        myCarInstance.SetTiresetPriceTotal(TiresetType.Standard); // FREE
+
+        // Reset then update shopping basket entries
+        basket.ResetBasket();
+        basket.SetBasketChangeItem("CarType", (int) carType);
+        basket.SetBasketChangeItem("TiresetType", (int) TiresetType.Standard);
+#if UNITY_EDITOR
+        basket.LogBasketItems();
+#endif
+
+        // Update labels with new totals
+        UpdateRunningTotalLabel();
     }
 
     public void HideFrontPrefabs()
@@ -74,12 +84,13 @@ public class GameManager : MonoBehaviour
     public void SetFront(FrontType frontToShow)
     {
         HideFrontPrefabs();
-        // TODO: Remove front from shopping list
-        // TODO: Add new value to shopping list OR zero if the user selected None (0)
-        if (frontToShow != FrontType.None)
-        {
-            ShowFrontPrefab(frontToShow);
-        }
+        ShowFrontPrefab(frontToShow);                                   // show prefab
+        myCarInstance.SetFrontPriceTotal(frontToShow);                  // set pricing
+        basket.SetBasketChangeItem("FrontType", (int) frontToShow);     // add to basket
+#if UNITY_EDITOR
+        basket.LogBasketItems();
+#endif
+        UpdateRunningTotalLabel();
     }
 
     public void ShowFrontPrefab(FrontType frontToShow)
@@ -138,8 +149,10 @@ public class GameManager : MonoBehaviour
     public void SetTireset(TiresetType tiresetToShow)
     {
         HideTiresetPrefabs();
-        // TODO: Remove from shopping list
-        // TODO: Add new value to shopping list
+        ShowTiresetPrefab(tiresetToShow);
+        myCarInstance.SetTiresetPriceTotal(tiresetToShow);
+        basket.SetBasketChangeItem("TiresetType", (int) tiresetToShow);
+        UpdateRunningTotalLabel();
         ShowTiresetPrefab(tiresetToShow);
     }
 
@@ -194,12 +207,13 @@ public class GameManager : MonoBehaviour
     public void SetWeapon(WeaponType weaponToShow)
     {
         HideWeaponPrefabs();
-        // TODO: Remove from shopping list
-        // TODO: Add new value to shopping list
-        if (weaponToShow != WeaponType.None)
-        {
-            ShowWeaponPrefab(weaponToShow);
-        }
+        ShowWeaponPrefab(weaponToShow);
+        myCarInstance.SetWeaponPriceTotal(weaponToShow);
+        basket.SetBasketChangeItem("WeaponType", (int) weaponToShow);
+#if UNITY_EDITOR
+        basket.LogBasketItems();
+#endif
+        UpdateRunningTotalLabel();
     }
 
     public void ShowWeaponPrefab(WeaponType weaponToShow)
@@ -231,5 +245,10 @@ public class GameManager : MonoBehaviour
                 break;
             }
         }
+    }
+
+    void UpdateRunningTotalLabel()
+    {
+        currentPriceText.text = "Running total: £" + myCarInstance.GetTotalSpend().ToString();
     }
 }
