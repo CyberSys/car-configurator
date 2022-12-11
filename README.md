@@ -8,4 +8,4 @@ For the prefabs to work correctly, please make sure to license the above package
 
 `Assets/_Imports/Customizable_cars_pack_style1`  
 
-Playable on [Unity Play](https://play.unity.com/mg/other/webgl-6g7).
+Playable on [Unity Play](https://play.unity.com/mg/other/webgl-mxe-1).
