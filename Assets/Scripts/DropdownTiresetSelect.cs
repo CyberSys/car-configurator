@@ -2,16 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class DropdownTiresetSelect : MonoBehaviour
 {
     private GameManager gameManager;
+    private Basket basket;
     private Dropdown dropdown;
+    private TMP_Text userSelectionsLabel;
 
     void Awake()
     {
+        basket = GameObject.FindObjectOfType<Basket>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         dropdown = transform.GetComponent<Dropdown>();
+        userSelectionsLabel = GameObject.Find("LabelCurrentSelection").GetComponent<TMP_Text>();
     }
 
     void Start()
@@ -24,5 +29,6 @@ public class DropdownTiresetSelect : MonoBehaviour
     {
         // Pass the dropdown selection value as a TiresetType to gameManager
         gameManager.SetTireset((TiresetType) dropdown.value);
+        userSelectionsLabel.text = basket.GetBasketItemsAsString();
     }
 }

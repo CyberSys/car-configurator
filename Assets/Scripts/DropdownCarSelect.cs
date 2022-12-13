@@ -7,16 +7,18 @@ using TMPro;
 public class DropdownCarSelect : MonoBehaviour
 {
     private GameManager gameManager;
+    private Basket basket;
     private Dropdown dropdownCarSelect;
     private Dropdown dropdownTiresetSelect;
     private Dropdown dropdownFrontSelect;
     private Dropdown dropdownWeaponSelect;
-    private TMP_Text currentSelectionText;
+    private TMP_Text userSelectionsLabel;
     
     void Awake()
     {
+        basket = GameObject.FindObjectOfType<Basket>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        currentSelectionText = GameObject.Find("LabelCurrentSelection").GetComponent<TMP_Text>();
+        userSelectionsLabel = GameObject.Find("LabelCurrentSelection").GetComponent<TMP_Text>();
         dropdownCarSelect = transform.GetComponent<Dropdown>();
     }
 
@@ -28,10 +30,9 @@ public class DropdownCarSelect : MonoBehaviour
 
         // Set correct default dropdown selecton
         dropdownCarSelect.value = (int) gameManager.myCarInstance.GetCarType();
-        
+
         // Set selection label default
-        currentSelectionText.text = "Configuring: " + gameManager.myCarInstance.GetCarFullNameAsString(
-                                                        gameManager.myCarInstance.GetCarType());
+        userSelectionsLabel.text = basket.GetBasketItemsAsString();
     }
 
     private void ResetDropdowns()
@@ -49,6 +50,6 @@ public class DropdownCarSelect : MonoBehaviour
         gameManager.ChangeCar((CarType) dropdownCarSelect.value);
 
         // Change selection label
-        currentSelectionText.text = "Configuring: " + gameManager.myCarInstance.GetCarFullNameAsString((CarType) dropdownCarSelect.value);
+        userSelectionsLabel.text = userSelectionsLabel.text = basket.GetBasketItemsAsString();
     }
 }

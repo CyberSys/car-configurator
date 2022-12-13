@@ -154,6 +154,9 @@ public class GameManager : MonoBehaviour
         basket.SetBasketChangeItem("TiresetType", (int) tiresetToShow);
         UpdateRunningTotalLabel();
         ShowTiresetPrefab(tiresetToShow);
+#if UNITY_EDITOR
+        basket.LogBasketItems();
+#endif
     }
 
     public void ShowTiresetPrefab(TiresetType tiresetToShow)
@@ -245,6 +248,11 @@ public class GameManager : MonoBehaviour
                 break;
             }
         }
+    }
+
+    public void SayHello()
+    {
+        Debug.Log("Hello");
     }
 
     void UpdateRunningTotalLabel()

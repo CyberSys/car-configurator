@@ -5,6 +5,7 @@ using UnityEngine;
 public class Basket : MonoBehaviour
 {
     Dictionary<string, int> basketItems = new Dictionary<string, int>();
+    [SerializeField] private GameManager gameManager;
 
     void Awake()
     {
@@ -21,13 +22,34 @@ public class Basket : MonoBehaviour
     /*********************************************************************
      * Class property getters
      *********************************************************************/
+    public string GetBasketItemsAsString()
+    {
+        int userSelection;
+        string basketItemsStr = "Selections:\n\n";
+
+        if (basketItems.TryGetValue("CarType", out userSelection))
+            basketItemsStr += gameManager.myCarInstance.GetCarFullNameAsString((CarType) userSelection) + "\n";
+
+        if (basketItems.TryGetValue("TiresetType", out userSelection))
+            basketItemsStr += gameManager.myCarInstance.GetTiresetNameAsString((TiresetType) userSelection) + "\n";
+
+        if (basketItems.TryGetValue("FrontType", out userSelection) && userSelection != 0)
+            basketItemsStr += gameManager.myCarInstance.GetFrontNameAsString((FrontType) userSelection) + "\n";
+
+        if (basketItems.TryGetValue("WeaponType", out userSelection) && userSelection != 0)
+            basketItemsStr += gameManager.myCarInstance.GetWeaponNameAsString((WeaponType) userSelection);
+
+        return basketItemsStr;
+    }
+
     public void LogBasketItems()
     {
-        Debug.Log("basketItems contains " + basketItems.Count + " items:");
+        /*Debug.Log("basketItems contains " + basketItems.Count + " items:");
         foreach (KeyValuePair<string, int> item in basketItems)
         {
             Debug.Log(item.Key + ": " + item.Value);
-        }
+        }*/
+        GetBasketItemsAsString();
     }
 
     /*********************************************************************
