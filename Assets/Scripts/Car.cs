@@ -6,7 +6,8 @@ public enum CarType
 {
     Buggy,
     LightCoupe,
-    HeavyCoupe
+    HeavyCoupe,
+    Pickup
 }
 
 public enum ConfigurableType
@@ -160,6 +161,15 @@ public class Car : ScriptableObject
                 totalPrice = GetTotalSpend();
                 return;
 
+            case CarType.Pickup:
+                carType = CarType.Pickup;
+                carTiresetType = TiresetType.Standard;
+                carFrontType = FrontType.None;
+                carWeaponType = WeaponType.None;
+                carPrefabStr = "Prefabs/Pickup";
+                totalPrice = GetTotalSpend();
+                return;
+
             default:
                 return;
         }
@@ -254,6 +264,9 @@ public class Car : ScriptableObject
             case CarType.HeavyCoupe:
                 return "Heavy Coupe";
 
+            case CarType.Pickup:
+                return "Pickup Truck";
+
             default:
                 return "";
         }
@@ -329,6 +342,9 @@ public class Car : ScriptableObject
 
             case CarType.HeavyCoupe:
                 return 50000;
+
+            case CarType.Pickup:
+                return 75000;
 
             default:
                 return 0;
