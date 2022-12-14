@@ -5,8 +5,8 @@ using UnityEngine;
 public enum CarType
 {
     Buggy,
-    HeavyCoupe,
-    LightCoupe
+    LightCoupe,
+    HeavyCoupe
 }
 
 public enum ConfigurableType
@@ -142,6 +142,15 @@ public class Car : ScriptableObject
                 totalPrice = GetTotalSpend();
                 return;
 
+            case CarType.LightCoupe:
+                carType = CarType.LightCoupe;
+                carTiresetType = TiresetType.Standard;
+                carFrontType = FrontType.None;
+                carWeaponType = WeaponType.None;
+                carPrefabStr = "Prefabs/LightCoupe";
+                totalPrice = GetTotalSpend();
+                return;
+
             case CarType.HeavyCoupe:
                 carType = CarType.HeavyCoupe;
                 carTiresetType = TiresetType.Standard;
@@ -239,11 +248,11 @@ public class Car : ScriptableObject
             case CarType.Buggy:
                 return "Bugs Buggy";
 
-            case CarType.HeavyCoupe:
-                return "Heavy Coupe";
-
             case CarType.LightCoupe:
                 return "Light Coupe";
+
+            case CarType.HeavyCoupe:
+                return "Heavy Coupe";
 
             default:
                 return "";
