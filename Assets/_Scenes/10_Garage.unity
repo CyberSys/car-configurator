@@ -2260,6 +2260,8 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: Pickup
       m_Image: {fileID: 0}
+    - m_Text: Minibus
+      m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -4466,7 +4468,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "<b>Vehicles</b>\n\nBuggy (base): \xA310000 \nLight  Coupe (base): \xA320000\nHeavy
-    Coupe (base): \xA350000\nPickup (base): \xA375000\n\n\n<b>Configurables</b>\n\n<u>Tiresets</u>\nStandard:
+    Coupe (base): \xA350000\nPickup (base): \xA375000\nMinibus (base): \xA385000\n\n\n<b>Configurables</b>\n\n<u>Tiresets</u>\nStandard:
     FREE\n(Upgrade) Spiked: \xA33000\n\n<u>Fronts</u>\n(Upgrade) Winch: \xA3500\n(Upgrade)
     Spiked: \xA32500\n(Upgrade) Shunt: \xA33500\n\n<u>Weapons</u>\n(Upgrade) Single
     Barrel: \xA3500\n(Upgrade) Twin Barrel: \xA3800"

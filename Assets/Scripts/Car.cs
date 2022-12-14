@@ -7,7 +7,8 @@ public enum CarType
     Buggy,
     LightCoupe,
     HeavyCoupe,
-    Pickup
+    Pickup,
+    Minibus
 }
 
 public enum ConfigurableType
@@ -170,6 +171,15 @@ public class Car : ScriptableObject
                 totalPrice = GetTotalSpend();
                 return;
 
+            case CarType.Minibus:
+                carType = CarType.Minibus;
+                carTiresetType = TiresetType.Standard;
+                carFrontType = FrontType.None;
+                carWeaponType = WeaponType.None;
+                carPrefabStr = "Prefabs/Minibus";
+                totalPrice = GetTotalSpend();
+                return;
+
             default:
                 return;
         }
@@ -267,6 +277,9 @@ public class Car : ScriptableObject
             case CarType.Pickup:
                 return "Pickup Truck";
 
+            case CarType.Minibus:
+                return "Minibus";
+
             default:
                 return "";
         }
@@ -345,6 +358,9 @@ public class Car : ScriptableObject
 
             case CarType.Pickup:
                 return 75000;
+
+            case CarType.Minibus:
+                return 85000;
 
             default:
                 return 0;
