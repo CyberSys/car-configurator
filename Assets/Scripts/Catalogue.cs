@@ -5,14 +5,8 @@ using UnityEngine.UI;
 
 public class Catalogue : MonoBehaviour
 {
-    private GameManager gameManager;
-    private Button closeButton;
-
-    void Awake()
-    {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        closeButton = GameObject.Find("CatalogueCloseButton").GetComponent<Button>();
-    }
+    [SerializeField] private GameManager gameManager;
+    [SerializeField] private Button closeButton;
 
     public void CloseCatalogue()
     {

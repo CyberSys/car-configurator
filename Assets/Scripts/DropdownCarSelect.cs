@@ -6,40 +6,35 @@ using TMPro;
 
 public class DropdownCarSelect : MonoBehaviour
 {
-    private GameManager gameManager;
-    private Basket basket;
-    private Dropdown dropdownCarSelect;
-    private Dropdown dropdownTiresetSelect;
-    private Dropdown dropdownFrontSelect;
-    private Dropdown dropdownWeaponSelect;
-    private TMP_Text userSelectionsLabel;
+    [SerializeField] private GameManager gameManager;
+    [SerializeField] private Basket basket;
+    [SerializeField] private Dropdown dropdownCarSelect;
+    [SerializeField] private Dropdown dropdownTiresetSelect;
+    [SerializeField] private Dropdown dropdownFrontSelect;
+    [SerializeField] private Dropdown dropdownWeaponSelect;
+    [SerializeField] private TMP_Text userSelectionsLabel;
     
-    void Awake()
-    {
-        basket = GameObject.FindObjectOfType<Basket>();
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        userSelectionsLabel = GameObject.Find("LabelCurrentSelection").GetComponent<TMP_Text>();
-        dropdownCarSelect = transform.GetComponent<Dropdown>();
-    }
-
     void Start()
     {
-        dropdownTiresetSelect = GameObject.Find("DropdownSelectTireset").GetComponent<Dropdown>();
-        dropdownFrontSelect = GameObject.Find("DropdownSelectFront").GetComponent<Dropdown>();
-        dropdownWeaponSelect = GameObject.Find("DropdownSelectWeapon").GetComponent<Dropdown>();
-
-        // Set correct default dropdown selecton
-        dropdownCarSelect.value = (int) gameManager.myCarInstance.GetCarType();
-
-        // Set selection label default
-        userSelectionsLabel.text = basket.GetBasketItemsAsString();
+        SetDefaultDropdown();
+        SetDefaultSelectionsLabel();
     }
 
-    private void ResetDropdowns()
+    void ResetDropdowns()
     {
         dropdownTiresetSelect.value = 0;
         dropdownFrontSelect.value = 0;
         dropdownWeaponSelect.value = 0;
+    }
+
+    void SetDefaultDropdown()
+    {
+        dropdownCarSelect.value = (int)gameManager.myCarInstance.GetCarType();
+    }
+
+    void SetDefaultSelectionsLabel()
+    {
+        userSelectionsLabel.text = basket.GetBasketItemsAsString();
     }
 
     public void ShowNextCar()

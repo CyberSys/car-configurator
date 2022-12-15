@@ -1250,6 +1250,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ab81f0004d547c4c9b9fbb7fd62dfda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 983897657}
+  basket: {fileID: 1943947855}
+  userSelectionsLabel: {fileID: 1044345043}
 --- !u!1 &383090790
 GameObject:
   m_ObjectHideFlags: 0
@@ -1504,6 +1507,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22add27fd8af76f47aaf24f6f1d3bb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 983897657}
+  basket: {fileID: 1943947855}
+  userSelectionsLabel: {fileID: 1044345043}
 --- !u!1 &475592621
 GameObject:
   m_ObjectHideFlags: 0
@@ -2203,6 +2209,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9f50b4a771bab842bcefb876cbd0650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 983897657}
+  basket: {fileID: 1943947855}
+  dropdownCarSelect: {fileID: 693300741}
+  dropdownTiresetSelect: {fileID: 1765043994}
+  dropdownFrontSelect: {fileID: 429159740}
+  dropdownWeaponSelect: {fileID: 262312365}
+  userSelectionsLabel: {fileID: 1044345043}
 --- !u!114 &693300741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3643,6 +3656,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bccb856ca9bc7240a5d5478bd1ea7f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 983897657}
+  closeButton: {fileID: 786053190}
 --- !u!1 &895946633
 GameObject:
   m_ObjectHideFlags: 0
@@ -6219,6 +6234,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19aec120985150943a024bb79a2be39e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 983897657}
+  basket: {fileID: 1943947855}
+  userSelectionsLabel: {fileID: 1044345043}
 --- !u!1 &1776567974
 GameObject:
   m_ObjectHideFlags: 0

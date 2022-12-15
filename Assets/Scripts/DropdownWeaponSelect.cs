@@ -6,23 +6,19 @@ using TMPro;
 
 public class DropdownWeaponSelect : MonoBehaviour
 {
-    private GameManager gameManager;
-    private Basket basket;
+    [SerializeField] private GameManager gameManager;
+    [SerializeField] private Basket basket;
+    [SerializeField] private TMP_Text userSelectionsLabel;
     private Dropdown dropdown;
-    private TMP_Text userSelectionsLabel;
 
     void Awake()
     {
-        basket = GameObject.FindObjectOfType<Basket>();
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        dropdown = transform.GetComponent<Dropdown>();
-        userSelectionsLabel = GameObject.Find("LabelCurrentSelection").GetComponent<TMP_Text>();
+        dropdown = GetComponent<Dropdown>();
     }
 
     void Start()
     {
-        // Set correct default dropdown selecton
-        dropdown.value = (int) gameManager.myCarInstance.GetWeaponType();
+        SetDefaultDropdown();
     }
 
     public void ShowNextWeapon()
@@ -30,5 +26,10 @@ public class DropdownWeaponSelect : MonoBehaviour
         // Pass the dropdown selection value as a WeaponType to gameManager
         gameManager.SetWeapon((WeaponType) dropdown.value);
         userSelectionsLabel.text = basket.GetBasketItemsAsString();
+    }
+
+    void SetDefaultDropdown()
+    {
+        dropdown.value = (int) gameManager.myCarInstance.GetWeaponType();
     }
 }
