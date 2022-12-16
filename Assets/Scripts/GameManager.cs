@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
+
     public Car myCarInstance;
     private Basket basket;
     private GameObject spawnPoint;
@@ -16,6 +18,16 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+
         basket = GameObject.FindGameObjectWithTag("ShoppingBasket").GetComponent<Basket>();
         spawnPoint = GameObject.Find("SpawnPoint");
         currentSelectionText = GameObject.Find("LabelCurrentSelection").GetComponent<TMP_Text>();

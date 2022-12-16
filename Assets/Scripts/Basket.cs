@@ -4,19 +4,21 @@ using UnityEngine;
 
 public class Basket : MonoBehaviour
 {
+    public static Basket instance;
+
     Dictionary<string, int> basketItems = new Dictionary<string, int>();
-    [SerializeField] private GameManager gameManager;
 
     void Awake()
     {
-        Basket[] existingBaskets = FindObjectsOfType<Basket>();
-
-        if (existingBaskets.Length > 0)
+        if (instance != null)
         {
-            Destroy(existingBaskets[0]);
+            Destroy(gameObject);
         }
-
-        DontDestroyOnLoad(gameObject);
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
     /*********************************************************************
@@ -28,18 +30,48 @@ public class Basket : MonoBehaviour
         string basketItemsStr = "Selections:\n\n";
 
         if (basketItems.TryGetValue("CarType", out userSelection))
-            basketItemsStr += gameManager.myCarInstance.GetCarFullNameAsString((CarType) userSelection) + "\n";
+            basketItemsStr += GameManager.instance.myCarInstance.GetCarFullNameAsString((CarType) userSelection) + "\n";
 
         if (basketItems.TryGetValue("TiresetType", out userSelection))
-            basketItemsStr += gameManager.myCarInstance.GetTiresetNameAsString((TiresetType) userSelection) + "\n";
+            basketItemsStr += GameManager.instance.myCarInstance.GetTiresetNameAsString((TiresetType) userSelection) + "\n";
 
         if (basketItems.TryGetValue("FrontType", out userSelection) && userSelection != 0)
-            basketItemsStr += gameManager.myCarInstance.GetFrontNameAsString((FrontType) userSelection) + "\n";
+            basketItemsStr += GameManager.instance.myCarInstance.GetFrontNameAsString((FrontType) userSelection) + "\n";
 
         if (basketItems.TryGetValue("WeaponType", out userSelection) && userSelection != 0)
-            basketItemsStr += gameManager.myCarInstance.GetWeaponNameAsString((WeaponType) userSelection);
+            basketItemsStr += GameManager.instance.myCarInstance.GetWeaponNameAsString((WeaponType) userSelection);
 
         return basketItemsStr;
+    }
+
+    public string GetBasketItemsAsFormattedString()
+    {
+        int userSelection;
+        string basketItemsStr = "<line-height=200%>\n";
+
+        if (basketItems.TryGetValue("TiresetType", out userSelection))
+            basketItemsStr += "\u2022<indent=1em>" + GameManager.instance.myCarInstance.GetTiresetNameAsString((TiresetType) userSelection) + "</indent>\n";
+
+        if (basketItems.TryGetValue("FrontType", out userSelection) && userSelection != 0)
+            basketItemsStr += "\u2022<indent=1em>" + GameManager.instance.myCarInstance.GetFrontNameAsString((FrontType) userSelection) + "</indent>\n";
+
+        if (basketItems.TryGetValue("WeaponType", out userSelection) && userSelection != 0)
+            basketItemsStr += "\u2022<indent=1em>" + GameManager.instance.myCarInstance.GetWeaponNameAsString((WeaponType) userSelection) + "</indent>";
+
+        // Remove tire count
+        basketItemsStr = basketItemsStr.Replace("4x ", "");
+
+        return basketItemsStr;
+    }
+
+    public CarType GetSelectedCarType()
+    {
+        int userSelection;
+
+        if (basketItems.TryGetValue("CarType", out userSelection))
+            return (CarType) userSelection;
+        else
+            return 0;
     }
 
     public void LogBasketItems()
