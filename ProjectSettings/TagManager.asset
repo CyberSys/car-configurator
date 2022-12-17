@@ -22,6 +22,7 @@ TagManager:
   - GameManager
   - LabelCurrentPrice
   - ShoppingBasket
+  - CameraWaypoint
   layers:
   - Default
   - TransparentFX
