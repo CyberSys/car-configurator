@@ -925,6 +925,8 @@ GameObject:
   - component: {fileID: 4120467862458113431}
   - component: {fileID: 4109551664988132557}
   - component: {fileID: 4128428446979144841}
+  - component: {fileID: -1973033527071042414}
+  - component: {fileID: -7301725389866668665}
   m_Layer: 0
   m_Name: Buggy
   m_TagString: Car
@@ -940,7 +942,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4134157802790961071}
   m_LocalRotation: {x: 0, y: 0.9238796, z: -0, w: -0.38268325}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1016,6 +1018,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e39f02d2b240a942badaab8727108c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &-1973033527071042414
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4134157802790961071}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &-7301725389866668665
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4134157802790961071}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.807909, y: 1.6135759, z: 4.4756374}
+  m_Center: {x: 0, y: -0.23560953, z: 0}
 --- !u!1 &4134254432821333507
 GameObject:
   m_ObjectHideFlags: 0
