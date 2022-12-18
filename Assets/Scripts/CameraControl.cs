@@ -8,6 +8,7 @@ public class CameraControl : MonoBehaviour
     [SerializeField] int cameraCurrentPos = 0;
     [SerializeField] float cameraLerpSpeed = 0.4f;
     [SerializeField] float cameraRotationSpeed = 0.2f;
+    Vector3 velocity = Vector3.zero;
 
     void LateUpdate()
     {
@@ -22,7 +23,7 @@ public class CameraControl : MonoBehaviour
 
     void SetCameraPosition()
     {
-        transform.position = Vector3.Lerp(transform.position, cameraWaypoints[cameraCurrentPos].transform.position, Time.deltaTime / cameraLerpSpeed);
+        transform.position = Vector3.SmoothDamp(transform.position, cameraWaypoints[cameraCurrentPos].transform.position, ref velocity, cameraLerpSpeed);
     }
 
     void SetCameraRotation()
