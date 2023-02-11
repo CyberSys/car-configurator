@@ -9,10 +9,10 @@ public class InputManager : MonoBehaviour
 
     void Update()
     {
-        ToggleHUD();
+        GetInputs();
     }
 
-    void ToggleHUD()
+    void GetInputs()
     {
         if (Input.GetKeyDown(KeyCode.H))
             OnPlayerHUDToggle?.Invoke();
