@@ -10,6 +10,10 @@ public class CameraControl : MonoBehaviour
     [SerializeField] float cameraRotationSpeed = 0.2f;
     Vector3 velocity = Vector3.zero;
 
+    void OnEnable() => InputManager.OnPlayerCameraToggle += SetNextCamera;
+
+    void OnDisable() => InputManager.OnPlayerCameraToggle -= SetNextCamera;
+
     void LateUpdate()
     {
         SetCameraPosition();
