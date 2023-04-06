@@ -1,5 +1,7 @@
 # Drive 2053 - Car Configurator
 
+[![Play Drive 2053: Car Configurator on Itch.io](./car-configurator.gif)](https://stevepdp.itch.io/drive-2053)  
+
 A 3D car configurator in a post-apocalyptic setting.
 
 
